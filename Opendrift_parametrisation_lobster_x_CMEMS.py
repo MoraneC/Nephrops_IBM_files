@@ -22,7 +22,7 @@ from numpy.random import RandomState
 from opendrift.readers.reader_netCDF_CF_generic import Reader
 import matplotlib.pyplot as plt
 import csv
-from opendrift.models.IBM_BITER_NEPHROPS_CMEMS import PelagicShrimpDrift
+from opendrift.models.Opendrift_module_lobster import PelagicLobsterDrift
 
 
 
