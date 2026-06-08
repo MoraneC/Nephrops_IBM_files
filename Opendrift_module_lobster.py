@@ -55,13 +55,14 @@ class Pelagiclobster(Lagrangian3DArray):
                     'units': '[]',
                     'default': 0})])
                     
-	# Function to compute the duration of the stage according to Water temperature.
+	# Function to compute the duration of the stage according to Water temperature. Unit of stage duration is initially "day"
     def updateStageTau(self):
+		dt = self.time_step.total_seconds()
         Temperature=self.environment.sea_water_temperature[np.all([self.elements.stages < 3],0)]
         A=np.array([-0.161, -0.175, -0.113])
         B=np.array([4.265, 4.646, 4.188])
         stages = np.int16(self.elements.stages[np.all([self.elements.stages < 3],0)])
-        self.elements.tau[np.all([self.elements.stages < 3],0)] += 1/((np.exp(A[stages] * Temperature +B[stages]))*24)
+        self.elements.tau[np.all([self.elements.stages < 3],0)] += dt/((np.exp(A[stages] * Temperature +B[stages]))*86400)
         
 	# Function to change the stages of the larvae if tau >= 1
     def updateIDStages(self):
